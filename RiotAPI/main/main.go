@@ -8,7 +8,7 @@ var discord_token string
 
 func main (){
 	flag.StringVar(&discord_token, "t", "", "Bot Token")
-	flag.StringVar(&discord_token, "k", "", "Riot API key")
+	flag.StringVar(&key, "k", "", "Riot API key")
 
 	flag.Parse()
 	StartBot(discord_token, key)
