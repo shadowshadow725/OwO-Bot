@@ -89,7 +89,9 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}else if strings.HasPrefix(m.Content, "!owo update"){
 			if m.Author.ID == apikey_updater{
 				apikey = strings.Replace(m.Content, "!owo update ", "", 1)
-				apikey = strings.ReplaceAll(apikey, " ", "")
+				for strings.Contains(apikey, " "){
+					apikey = strings.Replace(apikey, " ", "", 1)
+				}
 				s.ChannelMessageSend(m.ChannelID, "api key update success\n")
 			}
 		}else if strings.HasPrefix(m.Content, "!owo help"){
