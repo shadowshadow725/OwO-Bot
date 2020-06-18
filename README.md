@@ -17,6 +17,18 @@ $ cd OwO-Bot/RiotAPI/main
 $ go run *.go -k RiotApikey -t Discord_token -u user allowed to change riot api key 
 ```
 
+
+### Running the bot
+
+```sh
+command line arguments 
+$ -c specify config file
+$ -k Riot API key
+$ -t Discord_token
+$ -u user allowed to change riot api key 
+```
+
+
 License
 ----
 
