@@ -10,7 +10,7 @@ import (
 )
 var token string
 var apikey string
-var helpmsg = "!owo search <jungler username> - try to predict enemy jungle\n!owo help - display this help message\n"
+var helpmsg = "!owo search <jungler username> - try to predict enemy jungle\n!owo help - display this help message\n!owo update - update the riot api key (only works for user set )\n"
 var apikey_updater string // discord user that's allowed to update the api key
 
 var buffer = make([][]byte, 0)
