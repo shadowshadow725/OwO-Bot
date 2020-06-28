@@ -1,0 +1,7 @@
+Keys:
+  discordKey: "discord bot key"
+  riotKey: "riot api token"
+
+Users:
+    discordID: "your discord id, should be a number"
+    IGN: "IGN of the person you want the bot to look at"
