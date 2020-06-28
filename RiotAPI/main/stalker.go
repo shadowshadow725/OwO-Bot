@@ -7,9 +7,7 @@ import (
 )
 
 func stalk (username string, apikey string ) string {
-	//username string
-	//username := "Juke Jouster"
-	//apikey := "RGAPI-cb9ee4d3-f44e-4aa4-abe2-3b1c38e046a7"
+	
 	client := golio.NewClient(apikey, golio.WithRegion(api.RegionNorthAmerica), golio.WithLogger(logrus.New().WithField("foo", "bar")))
 	summoner, _ := client.Riot.Summoner.GetByName(username)
 	gameinfo, err := client.Riot.Spectator.GetCurrent(summoner.ID)
