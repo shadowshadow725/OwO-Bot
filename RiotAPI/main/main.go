@@ -27,7 +27,7 @@ func main (){
 	}
 	//fmt.Printf("%s\n%s\n%s\n%s\n", discord_token, key, updater_id, stalk_ign)
 
-	StartBot(discord_token, key, updater_id)
+	StartBot(discord_token, key, updater_id, stalk_ign)
 
 	//imgtest()
 	//SearchPlayer(, "DISCORD TARZANED", 20)

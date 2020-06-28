@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 )
 var token string
 var apikey string
@@ -15,8 +16,33 @@ var apikey_updater string // discord user that's allowed to update the api key
 
 var buffer = make([][]byte, 0)
 
+func startStalker(username string, apikey string, s *discordgo.Session){
+	for true{
+		fmt.Printf("ran in parallel\n")
+		result := stalk(username, apikey)
+		pastresult := ""
+		if result != ""{
+			channel, err := s.UserChannelCreate(updater_id)
+			if err != nil{
+				fmt.Printf("Error creating message\n")
+				os.Exit(2)
+			}
+			if result != pastresult{
+				s.ChannelMessageSend(channel.ID, result)
+				pastresult = result
+				time.Sleep(5*time.Minute)
 
-func StartBot(discord_token string, key string, updater string ){
+			}
+		}else{
+			time.Sleep(time.Minute)
+		}
+
+
+
+	}
+
+}
+func StartBot(discord_token string, key string, updater string, stalk_ign string){
 
 	apikey_updater = updater
 	token = discord_token
@@ -32,7 +58,7 @@ func StartBot(discord_token string, key string, updater string ){
 		fmt.Println("Error creating Discord session: ", err)
 		return
 	}
-
+	go startStalker(stalk_ign, key, dg)
 	// Register ready as a callback for the ready events.
 	dg.AddHandler(ready)
 
@@ -55,12 +81,14 @@ func StartBot(discord_token string, key string, updater string ){
 
 	// Cleanly close down the Discord session.
 	dg.Close()
+
 }
 // This function will be called (due to AddHandler above) when the bot receives
 // the "ready" event from Discord.
 func ready(s *discordgo.Session, event *discordgo.Ready) {
 	// Set the playing status.
 	s.UpdateStatus(0, "!owo help")
+
 }
 
 // This function will be called (due to AddHandler above) every time a new
@@ -72,8 +100,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
-
-
 	if strings.HasPrefix(m.Content, "!owo") {
 		fmt.Printf("%s called the bot\n", m.Author.ID)
 		// Find the channel that the message came from.
@@ -98,4 +124,5 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			s.ChannelMessageSend(m.ChannelID, "IDK what you want me to do\n")
 		}
 	}
+
 }

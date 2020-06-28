@@ -36,7 +36,7 @@ func ParseConfig(filename string, cfg *Config){
 	}
 
 	//fmt.Printf("%s\n ",cfg.Users.IGN)
-	fmt.Printf("%+v", cfg)
+	//fmt.Printf("%+v", cfg)
 	f.Close()
 
 	return
