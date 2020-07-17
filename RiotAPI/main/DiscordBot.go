@@ -58,7 +58,7 @@ func StartBot(discord_token string, key string, updater string, stalk_ign string
 		fmt.Println("Error creating Discord session: ", err)
 		return
 	}
-	go startStalker(stalk_ign, key, dg)
+	// go startStalker(stalk_ign, key, dg) // disabled due to issues 
 	// Register ready as a callback for the ready events.
 	dg.AddHandler(ready)
 
